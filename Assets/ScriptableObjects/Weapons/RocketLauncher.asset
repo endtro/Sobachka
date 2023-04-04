@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2f33656c79b1db45aa8d4c8a6e42a40, type: 3}
+  m_Name: RocketLauncher
+  m_EditorClassIdentifier: 
+  _icon: {fileID: -1572798325, guid: 067cacf6ad787ce46b5c411967236e5f, type: 3}
+  _name: "\u0411\u043B\u043E\u043A \u041D\u0410\u0420"
+  _price: 2500
+  _description: "\u041E\u043F\u0438\u0441\u0430\u043D\u0438\u0435 \u0431\u043B\u043E\u043A\u0430
+    \u041D\u0410\u0420"
+  Damage: 30
+  ProjectilePrefab: {fileID: 3555969509349744259, guid: 61f25ff92052ed54099a1e1175814899, type: 3}
+  ShootDelay: 0.7
+  PowerPerShot: 12
+  _spread: 0.5
+  _projectileCount: 2
+  _launchForce: 3

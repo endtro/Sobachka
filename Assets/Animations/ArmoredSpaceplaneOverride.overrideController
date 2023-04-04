@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: ArmoredSpaceplaneOverride
+  m_Controller: {fileID: 9100000, guid: 16e01e60e75cff64ea473ffb2062d8b9, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 93eab898417ff9f4797b137cfa7a8958, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 1f1c3fe509b685e43b34f0005a6f467b, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 87c111ebc24627140a798fd444244d76, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 3f87cab93f648b84e9acba9c1edb4e8f, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 25742ed1575bf624fadd5f5451535172, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: e7308eb9f5109c843b041397bbcc479b, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 2aca3f0ab7e481e4c83a68ae50c6b844, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 12f7dc5050d25184dbbaf6eacb1910ff, type: 2}

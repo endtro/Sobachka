@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d8aa9487e1cc3748a00c64e26ed0e6c, type: 3}
+  m_Name: EmptyWeaponSlot
+  m_EditorClassIdentifier: 
+  _icon: {fileID: 1550106484, guid: 067cacf6ad787ce46b5c411967236e5f, type: 3}
+  _name: "\u041F\u0443\u0441\u0442\u043E"
+  _price: 0
+  _description: 
+  Damage: 0
+  ProjectilePrefab: {fileID: 0}
+  ShootDelay: 0
+  PowerPerShot: 0
