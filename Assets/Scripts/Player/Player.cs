@@ -100,6 +100,11 @@ public class Player : MonoBehaviour, IDestructible
 
     public void LoseHealth(float value)
     {
+        if (_health == 0)
+        {
+            return;
+        }
+
         _energy -= value;
 
         if (_energy < 0f)
@@ -203,7 +208,7 @@ public class Player : MonoBehaviour, IDestructible
         transform.position = position;
     }
 
-    private void Setup()
+    public void Setup()
     {
         SetSpaceplane(_spaceplane);
         SetGenerator(_generator);

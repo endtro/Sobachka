@@ -12,6 +12,7 @@ public class Rocket : Projectile
     private Rigidbody2D _rigidbody2D;
     private SpriteRenderer _spriteRenderer;
     private float _startTime;
+    private WaitForFixedUpdate _waitForFixedUpdate = new WaitForFixedUpdate();
 
     private void Awake()
     {
@@ -53,13 +54,12 @@ public class Rocket : Projectile
         _rigidbody2D.velocity = Vector3.zero;
         _smokeTrail.Play();
 
-        // Синхронизовать с FixedUpdate
         while (Time.time < DeathTime)
         {
             transform.Translate(MoveSpeed * Time.deltaTime * Vector3.up, Space.Self);
             transform.Rotate(0f, 0f, Random.Range(_flightpathDeviation * -1f, _flightpathDeviation) * Time.deltaTime);
 
-            yield return null;
+            yield return _waitForFixedUpdate;
         }
 
         StartCoroutine(Deactivate());

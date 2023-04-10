@@ -1,8 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// Хотелось бы это как-то все переписать под generic type, чтобы словарь хранил записи типа <int, T>, и можно было сразу принимать и отдавать
-// объекты ссылками на нужные компоненты, тем самым избежав использования GetComponent. Сомневаюсь, что Dictionary позволяет такое делать.
+// Хотелось бы это как-то все переписать под generic type, чтобы словарь хранил записи типа <int, Stack<T>>, и можно было сразу принимать
+// и отдавать объекты ссылками на нужные компоненты, тем самым избежав использования GetComponent. Сомневаюсь, что Dictionary позволяет
+// такое делать.
 public static class ObjectPooling
 {
     private static Dictionary<int, Stack<PoolObject>> _pools = new Dictionary<int, Stack<PoolObject>>();

@@ -10,7 +10,8 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private Level _shopLevel;
     [SerializeField] private List<Level> _levels = new List<Level>();
     [SerializeField] private Image _blackScreen;
-    // _fadeTime работает неправильно. Подробней - в методе Fade.
+    // _fadeTime должно работать как длительность затемнения экрана, однако значения ниже 1f увеличивают время, а выше - уменьшают.
+    // Сходу не придумал, как это исправить, и решил отложить на когда-нибудь напотом.
     [SerializeField] private float _fadeTime = 1f;
     [SerializeField] private float _blackScreenPause = 0.1f;
 
@@ -48,7 +49,7 @@ public class LevelManager : MonoBehaviour
     {
         if (fadeIn)
         {
-            StartCoroutine(Fade(1f));
+            FadeIn();
             yield return _fadeTimeWaitForSeconds;
         }
 
@@ -63,7 +64,7 @@ public class LevelManager : MonoBehaviour
 
         if (fadeOut)
         {
-            StartCoroutine(Fade(0f));
+            StartCoroutine(FadeOut());
         }
     }
 
@@ -74,12 +75,14 @@ public class LevelManager : MonoBehaviour
 
     public void BackToShop()
     {
+        Player.Instance.Setup();
+
         StartCoroutine(LoadShop());
     }
 
     private IEnumerator LoadLevel(int index)
     {
-        StartCoroutine(Fade(1f));
+        FadeIn();
         yield return _fadeTimeWaitForSeconds;
 
         if (_shopLevel.gameObject.activeInHierarchy)
@@ -97,7 +100,7 @@ public class LevelManager : MonoBehaviour
         _levels[index].gameObject.SetActive(true);
         _combatGUI.SetActive(true);
 
-        StartCoroutine(Fade(0f));
+        StartCoroutine(FadeOut());
     }
 
     public void CompleteLevel()
@@ -107,31 +110,33 @@ public class LevelManager : MonoBehaviour
         StartCoroutine(LoadShop());
     }
 
+    private void FadeIn()
+    {
+        _blackScreen.gameObject.SetActive(true);
+
+        StartCoroutine(Fade(1f));
+    }
+
+    private IEnumerator FadeOut()
+    {
+        StartCoroutine(Fade(0f));
+        yield return _fadeTimeWaitForSeconds;
+
+        _blackScreen.gameObject.SetActive(false);
+    }
+
     private IEnumerator Fade(float targetAlpha)
     {
-        if (targetAlpha == 1f)
-        {
-            _blackScreen.gameObject.SetActive(true);
-        }
-
         Color color = Color.black;
 
         color.a = (targetAlpha == 0f) ? 1f : 0f;
 
         while (color.a != targetAlpha)
         {
-            // _fadeTime должно работать как длительность затемнения экрана, однако значения ниже 1f увеличивают время, а выше - уменьшают.
-            // Сходу не придумал, как это исправить, и решил отложить на когда-нибудь напотом.
             color.a = Mathf.MoveTowards(color.a, targetAlpha, Time.deltaTime * _fadeTime);
             _blackScreen.color = color;
 
-            Debug.Log(color.a);
             yield return null;
-        }
-
-        if (targetAlpha == 0f)
-        {
-            _blackScreen.gameObject.SetActive(false);
         }
     }
 }

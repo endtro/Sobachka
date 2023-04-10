@@ -13,13 +13,6 @@ public abstract class UiBar : MonoBehaviour
         Player = FindObjectOfType<Player>();
     }
 
-    // Одного OnEnable недостаточно для установки начальных значений, и, без Start, полоски активируются со значениями по умолчанию.
-    // Я не понимаю почему.
-    private void Start()
-    {
-        SetSliderValues();
-    }
-
     public virtual void OnEnable()
     {
         SetSliderValues();
