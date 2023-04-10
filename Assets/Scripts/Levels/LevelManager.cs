@@ -49,7 +49,7 @@ public class LevelManager : MonoBehaviour
     {
         if (fadeIn)
         {
-            FadeIn();
+            StartCoroutine(Fade(1f));
             yield return _fadeTimeWaitForSeconds;
         }
 
@@ -64,7 +64,7 @@ public class LevelManager : MonoBehaviour
 
         if (fadeOut)
         {
-            StartCoroutine(FadeOut());
+            StartCoroutine(Fade(0f));
         }
     }
 
@@ -82,7 +82,7 @@ public class LevelManager : MonoBehaviour
 
     private IEnumerator LoadLevel(int index)
     {
-        FadeIn();
+        StartCoroutine(Fade(1f));
         yield return _fadeTimeWaitForSeconds;
 
         if (_shopLevel.gameObject.activeInHierarchy)
@@ -100,7 +100,7 @@ public class LevelManager : MonoBehaviour
         _levels[index].gameObject.SetActive(true);
         _combatGUI.SetActive(true);
 
-        StartCoroutine(FadeOut());
+        StartCoroutine(Fade(0f));
     }
 
     public void CompleteLevel()
@@ -110,23 +110,13 @@ public class LevelManager : MonoBehaviour
         StartCoroutine(LoadShop());
     }
 
-    private void FadeIn()
-    {
-        _blackScreen.gameObject.SetActive(true);
-
-        StartCoroutine(Fade(1f));
-    }
-
-    private IEnumerator FadeOut()
-    {
-        StartCoroutine(Fade(0f));
-        yield return _fadeTimeWaitForSeconds;
-
-        _blackScreen.gameObject.SetActive(false);
-    }
-
     private IEnumerator Fade(float targetAlpha)
     {
+        if (targetAlpha != 0f)
+        {
+            _blackScreen.gameObject.SetActive(true);
+        }
+
         Color color = Color.black;
 
         color.a = (targetAlpha == 0f) ? 1f : 0f;
@@ -137,6 +127,11 @@ public class LevelManager : MonoBehaviour
             _blackScreen.color = color;
 
             yield return null;
+        }
+
+        if (targetAlpha == 0f)
+        {
+            _blackScreen.gameObject.SetActive(false);
         }
     }
 }
