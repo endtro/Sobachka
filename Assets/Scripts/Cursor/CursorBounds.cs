@@ -12,14 +12,14 @@ public struct CursorBounds
     public float MaxX;
     public float MinY;
     public float MaxY;
-    public OutOfBoundsBehavior Behaviour;
+    public OutOfBoundsBehavior Behavior;
 
-    public CursorBounds(float minX, float maxX, float minY, float maxY, OutOfBoundsBehavior behaviour)
+    public CursorBounds(float minX, float maxX, float minY, float maxY, OutOfBoundsBehavior behavior)
     {
         MinX = minX;
         MaxX = maxX;
         MinY = minY;
         MaxY = maxY;
-        Behaviour = behaviour;
+        Behavior = behavior;
     }
 }

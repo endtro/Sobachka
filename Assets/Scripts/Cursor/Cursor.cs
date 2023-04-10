@@ -37,12 +37,12 @@ public class Cursor : MonoBehaviour
     {
         Vector3 mousePosition = Input.mousePosition;
 
-        if (_screenBounds.Behaviour == CursorBounds.OutOfBoundsBehavior.ClampCoordinates)
+        if (_screenBounds.Behavior == CursorBounds.OutOfBoundsBehavior.ClampCoordinates)
         {
             mousePosition.x = Mathf.Clamp(mousePosition.x, _screenBounds.MinX, _screenBounds.MaxX);
             mousePosition.y = Mathf.Clamp(mousePosition.y, _screenBounds.MinY, _screenBounds.MaxY);
         }
-        else if (_screenBounds.Behaviour == CursorBounds.OutOfBoundsBehavior.DefaultPosition)
+        else if (_screenBounds.Behavior == CursorBounds.OutOfBoundsBehavior.DefaultPosition)
         {
             if (mousePosition.x < _screenBounds.MinX || mousePosition.x > _screenBounds.MaxX
                 || mousePosition.y < _screenBounds.MinY || mousePosition.y > _screenBounds.MaxY)
@@ -86,7 +86,7 @@ public class Cursor : MonoBehaviour
         const float BottomOneThird = 3f;
 
         _screenBounds = new CursorBounds(_viewportBounds.MinX * Screen.width, _viewportBounds.MaxX * Screen.width,
-            _viewportBounds.MinY * Screen.height, _viewportBounds.MaxY * Screen.height, _viewportBounds.Behaviour);
+            _viewportBounds.MinY * Screen.height, _viewportBounds.MaxY * Screen.height, _viewportBounds.Behavior);
 
         _defaultPosition.x = (_screenBounds.MinX + _screenBounds.MaxX / Middle);
         _defaultPosition.y = (_screenBounds.MinY + _screenBounds.MaxY / BottomOneThird);

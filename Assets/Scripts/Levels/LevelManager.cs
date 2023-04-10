@@ -10,7 +10,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private Level _shopLevel;
     [SerializeField] private List<Level> _levels = new List<Level>();
     [SerializeField] private Image _blackScreen;
-    // _fadeTime работает неправильно. Подробней - в методе FadeIn.
+    // _fadeTime работает неправильно. Подробней - в методе Fade.
     [SerializeField] private float _fadeTime = 1f;
     [SerializeField] private float _blackScreenPause = 0.1f;
 
@@ -48,7 +48,7 @@ public class LevelManager : MonoBehaviour
     {
         if (fadeIn)
         {
-            StartCoroutine(FadeIn());
+            StartCoroutine(Fade(1f));
             yield return _fadeTimeWaitForSeconds;
         }
 
@@ -63,7 +63,7 @@ public class LevelManager : MonoBehaviour
 
         if (fadeOut)
         {
-            StartCoroutine(FadeOut());
+            StartCoroutine(Fade(0f));
         }
     }
 
@@ -79,7 +79,7 @@ public class LevelManager : MonoBehaviour
 
     private IEnumerator LoadLevel(int index)
     {
-        StartCoroutine(FadeIn());
+        StartCoroutine(Fade(1f));
         yield return _fadeTimeWaitForSeconds;
 
         if (_shopLevel.gameObject.activeInHierarchy)
@@ -97,7 +97,7 @@ public class LevelManager : MonoBehaviour
         _levels[index].gameObject.SetActive(true);
         _combatGUI.SetActive(true);
 
-        StartCoroutine(FadeOut());
+        StartCoroutine(Fade(0f));
     }
 
     public void CompleteLevel()
@@ -107,38 +107,31 @@ public class LevelManager : MonoBehaviour
         StartCoroutine(LoadShop());
     }
 
-    private IEnumerator FadeIn()
+    private IEnumerator Fade(float targetAlpha)
     {
-        _blackScreen.gameObject.SetActive(true);
+        if (targetAlpha == 1f)
+        {
+            _blackScreen.gameObject.SetActive(true);
+        }
 
         Color color = Color.black;
-        color.a = 0f;
 
-        while (color.a < 1f)
+        color.a = (targetAlpha == 0f) ? 1f : 0f;
+
+        while (color.a != targetAlpha)
         {
             // _fadeTime должно работать как длительность затемнения экрана, однако значения ниже 1f увеличивают время, а выше - уменьшают.
             // Сходу не придумал, как это исправить, и решил отложить на когда-нибудь напотом.
-            color.a += Time.deltaTime * _fadeTime;
+            color.a = Mathf.MoveTowards(color.a, targetAlpha, Time.deltaTime * _fadeTime);
             _blackScreen.color = color;
 
+            Debug.Log(color.a);
             yield return null;
         }
-    }
 
-    private IEnumerator FadeOut()
-    {
-        Color color = Color.black;
-        color.a = 1f;
-
-        while (color.a > 0f)
+        if (targetAlpha == 0f)
         {
-            // То же, что и в FadeIn.
-            color.a -= Time.deltaTime * _fadeTime;
-            _blackScreen.color = color;
-
-            yield return null;
+            _blackScreen.gameObject.SetActive(false);
         }
-
-        _blackScreen.gameObject.SetActive(false);
     }
 }
