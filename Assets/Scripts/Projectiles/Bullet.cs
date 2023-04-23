@@ -14,6 +14,7 @@ public class Bullet : Projectile
             yield return _waitForFixedUpdate;
         }
 
-        gameObject.SetActive(false);
+        // Проблема
+        ObjectPooling<Projectile>.Return(this);
     }
 }

@@ -80,6 +80,7 @@ public class Rocket : Projectile
             yield return null;
         }
 
-        gameObject.SetActive(false);
+        // Проблема
+        ObjectPooling<Projectile>.Return(this);
     }
 }

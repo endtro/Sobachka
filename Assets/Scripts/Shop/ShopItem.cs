@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-public class ShopItem : PoolObject
+public class ShopItem : PoolObject<ShopItem>
 {
     [SerializeField] private Button _button;
     [SerializeField] private Image _icon;
@@ -21,10 +21,8 @@ public class ShopItem : PoolObject
         remove => _button.onClick.RemoveListener(value);
     }
 
-    public override void OnDisable()
+    private void OnDisable()
     {
-        base.OnDisable();
-
         _button.onClick.RemoveAllListeners();
     }
 

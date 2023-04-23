@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public abstract class Projectile : PoolObject
+public abstract class Projectile : PoolObject<Projectile>
 {
     [SerializeField] private protected float MoveSpeed;
 
@@ -26,7 +26,8 @@ public abstract class Projectile : PoolObject
             {
                 destructible.LoseHealth(Damage);
 
-                gameObject.SetActive(false);
+                // Проблема
+                ObjectPooling<Projectile>.Return(this);
             }
         }
     }

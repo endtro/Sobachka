@@ -1,42 +1,42 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// Хотелось бы это как-то все переписать под generic type, чтобы словарь хранил записи типа <int, Stack<T>>, и можно было сразу принимать
-// и отдавать объекты ссылками на нужные компоненты, тем самым избежав использования GetComponent. Сомневаюсь, что Dictionary позволяет
-// такое делать.
-public static class ObjectPooling
+public static class ObjectPooling<T> where T : PoolObject<T>
 {
-    private static Dictionary<int, Stack<PoolObject>> _pools = new Dictionary<int, Stack<PoolObject>>();
+    private static Dictionary<int, ObjectPool<T>> _pools = new Dictionary<int, ObjectPool<T>>();
 
-    public static PoolObject Get(PoolObject prefab)
+    public static T Get(T prefab)
     {
         int poolKey = prefab.GetInstanceID();
 
-        PoolObject poolObject;
+        T poolObject;
 
         if (_pools.ContainsKey(poolKey) == false)
         {
-            _pools.Add(poolKey, new Stack<PoolObject>());
+            _pools.Add(poolKey, new ObjectPool<T>());
         }
         else
         {
             if (_pools[poolKey].Count > 0)
             {
-                poolObject = _pools[poolKey].Pop();
+                poolObject = _pools[poolKey].Get();
                 poolObject.gameObject.SetActive(true);
 
                 return poolObject;
             }
         }
 
-        poolObject = GameObject.Instantiate(prefab);
+
+        poolObject = GameObject.Instantiate(prefab).GetComponent<T>();
         poolObject.SetPoolKey(poolKey);
 
         return poolObject;
     }
 
-    public static void Return(PoolObject poolObject)
+    public static void Return(T poolObject)
     {
-        _pools[poolObject.PoolKey].Push(poolObject);
+        poolObject.gameObject.SetActive(false);
+
+        _pools[poolObject.PoolKey].Return(poolObject);
     }
 }

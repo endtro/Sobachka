@@ -100,7 +100,7 @@ public class Player : MonoBehaviour, IDestructible
 
     public void LoseHealth(float value)
     {
-        if (_health == 0)
+        if (_health <= 0)
         {
             return;
         }
@@ -119,8 +119,6 @@ public class Player : MonoBehaviour, IDestructible
 
         if (_health <= 0f)
         {
-            _health = 0f;
-
             LevelManager.Instance.BackToShop();
         }
     }

@@ -190,7 +190,7 @@ public class Shop : MonoBehaviour
 
     private ShopItem AddShopItem(Module module)
     {
-        ShopItem shopItem = ObjectPooling.Get(_shopItemPrefab).GetComponent<ShopItem>();
+        ShopItem shopItem = ObjectPooling<ShopItem>.Get(_shopItemPrefab);
 
         shopItem.Setup(module);
         shopItem.transform.SetParent(_shopContent);

@@ -17,12 +17,12 @@ public class VolleyGun : Weapon
 
             for (int i = 0; i < shootDirections.Length; i++)
             {
-                PoolObject projectile = ObjectPooling.Get(ProjectilePrefab);
+                Projectile projectile = ObjectPooling<Projectile>.Get(ProjectilePrefab);
 
                 projectile.transform.position = weaponPosition;
                 projectile.transform.rotation = Quaternion.Euler(0f, 0f, coneLeftEdge + deltaAngle * i);
 
-                projectile.GetComponent<Projectile>().Setup(ownerTag, Damage);
+                projectile.Setup(ownerTag, Damage);
             }
 
             player.LosePower(PowerPerShot);

@@ -4,18 +4,16 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private Enemy _prefab;
-    [SerializeField] Vector3[] _path;
+    [SerializeField] private Vector3[] _path;
 
     private Enemy _enemy;
 
     public Enemy Spawn(Level level)
     {
-        PoolObject enemy = ObjectPooling.Get(_prefab);
-        _enemy = enemy.GetComponent<Enemy>();
+        _enemy = ObjectPooling<Enemy>.Get(_prefab);
 
         _enemy.Initialize(ref _path, level);
-
-        enemy.transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
+        _enemy.transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
 
         return _enemy;
     }

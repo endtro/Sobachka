@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.Events;
 
 [RequireComponent(typeof(SpriteRenderer))]
-public class Enemy : PoolObject, IDestructible
+public class Enemy : PoolObject<Enemy>, IDestructible
 {
     [SerializeField] private float _maxHealth;
     [SerializeField] private float _moveSpeed;
@@ -29,13 +29,11 @@ public class Enemy : PoolObject, IDestructible
         _shootDelayWaitForSeconds = new WaitForSeconds(_shootDelay);
     }
 
-    public override void OnDisable()
+    private void OnDisable()
     {
         _pathIndex = 0;
         _level.RemoveActiveEnemy(this);
         StopAllCoroutines();
-
-        base.OnDisable();
     }
 
     public void Initialize(ref Vector3[] path, Level level)
@@ -86,14 +84,14 @@ public class Enemy : PoolObject, IDestructible
         {
             if (_nextShootTime < Time.time)
             {
-                PoolObject projectile = ObjectPooling.Get(_projectile);
+                Projectile projectile = ObjectPooling<Projectile>.Get(_projectile);
 
                 projectile.transform.position = transform.position;
 
                 Vector3 playerDirection = Player.Instance.transform.position - projectile.transform.position;
                 projectile.transform.rotation = Quaternion.FromToRotation(Vector3.up, playerDirection);
 
-                projectile.GetComponent<Projectile>().Setup(gameObject.tag, _damage);
+                projectile.Setup(gameObject.tag, _damage);
 
                 _nextShootTime = Time.time + _shootDelay;
 

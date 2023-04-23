@@ -12,12 +12,12 @@ public class Autocannon : Weapon
             float spreadHalved = _spread * 0.5f;
             Quaternion spread = Quaternion.Euler(0f, 0f, Random.Range(spreadHalved * -1f, spreadHalved));
 
-            PoolObject projectile = ObjectPooling.Get(ProjectilePrefab);
+            Projectile projectile = ObjectPooling<Projectile>.Get(ProjectilePrefab);
 
             projectile.transform.position = weaponPosition;
             projectile.transform.rotation = spread;
 
-            projectile.GetComponent<Projectile>().Setup(ownerTag, Damage);
+            projectile.Setup(ownerTag, Damage);
 
             player.LosePower(PowerPerShot);
 
