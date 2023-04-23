@@ -55,7 +55,7 @@ public class Enemy : PoolObject<Enemy>, IDestructible
         {
             Player.Instance.ChangeScore(_scoreReward);
 
-            gameObject.SetActive(false);
+            ObjectPooling<Enemy>.Return(this);
         }
     }
 

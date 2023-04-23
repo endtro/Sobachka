@@ -48,17 +48,15 @@ public class RocketLauncher : Weapon
 
     private Rocket SpawnRocket(string ownerTag, Vector3 position, Vector2 force)
     {
-        Projectile projectile = ObjectPooling<Projectile>.Get(ProjectilePrefab);
+        // Проблема
+        Rocket projectile = (Rocket)ObjectPooling<Projectile>.Get(ProjectilePrefab);
 
         projectile.transform.position = position;
         projectile.transform.rotation = Quaternion.identity;
 
-        // Проблема
-        Rocket rocketComponent = projectile.GetComponent<Rocket>();
+        projectile.Setup(ownerTag, Damage);
+        projectile.AddForce(force);
 
-        rocketComponent.Setup(ownerTag, Damage);
-        rocketComponent.AddForce(force);
-
-        return rocketComponent;
+        return projectile;
     }
 }
