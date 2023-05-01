@@ -113,7 +113,7 @@ public class Level : MonoBehaviour
             yield return null;
         }
 
-        LevelManager.Instance.CompleteLevel();
+        LevelSwitcher.Instance.CompleteLevel();
     }
 
     private void OnDrawGizmos()

@@ -2,7 +2,7 @@ using UnityEngine;
 
     // Использование OnDisable для возврата объектов в пул оказалось очень плохой идеей, так как некоторым объектам необходимо, перед
     // возвратом, сбрасывать "родителя". В override-е OnDisable Юнити этого делать не хочет.
-public abstract class PoolObject<T> : MonoBehaviour where T : PoolObject<T>
+public abstract class PoolObject : MonoBehaviour
 {
     private int _poolKey;
 

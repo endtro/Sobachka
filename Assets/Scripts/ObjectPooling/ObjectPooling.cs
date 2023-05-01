@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class ObjectPooling<T> where T : PoolObject<T>
+public static class ObjectPooling<T> where T : PoolObject
 {
     private static Dictionary<int, ObjectPool<T>> _pools = new Dictionary<int, ObjectPool<T>>();
 

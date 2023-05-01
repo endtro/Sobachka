@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class LevelManager : MonoBehaviour
+public class LevelSwitcher : MonoBehaviour
 {
     [SerializeField] private GameObject _combatGUI;
     [SerializeField] private GameObject _shopGUI;
@@ -15,13 +15,13 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private float _fadeTime = 1f;
     [SerializeField] private float _blackScreenPause = 0.1f;
 
-    private static LevelManager _instance;
+    private static LevelSwitcher _instance;
 
     private int _levelIndex = 0;
     private Level _loadedLevel;
     private WaitForSeconds _fadeTimeWaitForSeconds;
 
-    public static LevelManager Instance => _instance;
+    public static LevelSwitcher Instance => _instance;
 
     private void Awake()
     {

@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-public class ShopItem : PoolObject<ShopItem>
+public class ShopItem : PoolObject
 {
     [SerializeField] private Button _button;
     [SerializeField] private Image _icon;

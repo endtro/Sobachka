@@ -119,7 +119,7 @@ public class Player : MonoBehaviour, IDestructible
 
         if (_health <= 0f)
         {
-            LevelManager.Instance.BackToShop();
+            LevelSwitcher.Instance.BackToShop();
         }
     }
 

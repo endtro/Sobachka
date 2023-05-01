@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.Events;
 
 [RequireComponent(typeof(SpriteRenderer))]
-public class Enemy : PoolObject<Enemy>, IDestructible
+public class Enemy : PoolObject, IDestructible
 {
     [SerializeField] private float _maxHealth;
     [SerializeField] private float _moveSpeed;

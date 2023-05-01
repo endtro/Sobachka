@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public abstract class Projectile : PoolObject<Projectile>
+public abstract class Projectile : PoolObject
 {
     [SerializeField] private protected float MoveSpeed;
 
