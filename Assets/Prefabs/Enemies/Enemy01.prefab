@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 8892314143833805667}
   - component: {fileID: 3297868170068351466}
   - component: {fileID: 7429883145332089541}
+  - component: {fileID: 8486431314875307945}
+  - component: {fileID: 215632258652459737}
   m_Layer: 0
   m_Name: Enemy01
   m_TagString: Enemy
@@ -115,8 +117,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHealth: 40
-  _moveSpeed: 2
   _scoreReward: 250
+--- !u!114 &8486431314875307945
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7429883145332089542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ec441df9ce06e340b5ca1e175d15494, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _moveSpeed: 2
+--- !u!114 &215632258652459737
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7429883145332089542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df7d8f418d584a945a430765f8b058c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   _projectile: {fileID: 3005397507362352850, guid: 3eca6cc79a6b3934bbccb344a17e5243, type: 3}
   _damage: 40
   _shootDelay: 1.5
